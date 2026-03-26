@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 30 20% 98%;
+    --foreground: 20 14.3% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --primary: 24 9.8% 10%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 20 14.3% 4.1%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 60 9.1% 97.8%;
+    --card: 20 14.3% 4.1%;
+    --card-foreground: 60 9.1% 97.8%;
+    --popover: 20 14.3% 4.1%;
+    --popover-foreground: 60 9.1% 97.8%;
+    --primary: 60 9.1% 97.8%;
+    --primary-foreground: 24 9.8% 10%;
+    --secondary: 12 6.5% 15.1%;
+    --secondary-foreground: 60 9.1% 97.8%;
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 5.4% 63.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 60 9.1% 97.8%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 12 6.5% 15.1%;
+    --input: 12 6.5% 15.1%;
+    --ring: 24 5.7% 82.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY THEMES
+   ============================================ */
+
+/* High Contrast Theme */
+.theme-high-contrast {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+  --board-bg: 0 0% 15%;
+  --board-lines: 0 0% 100%;
+  --player1: 0 0% 100%;
+  --player2: 0 0% 0%;
+  --player2-stroke: 0 0% 100%;
+  --selected: 60 100% 50%;
+  --legal-move: 120 100% 35%;
+  --shoot-target: 0 100% 50%;
+}
+
+/* Colorblind Theme (Deuteranopia-friendly) */
+.theme-colorblind {
+  --background: 200 20% 95%;
+  --foreground: 200 50% 10%;
+  --board-bg: 180 30% 85%;
+  --board-lines: 200 40% 30%;
+  --player1: 220 70% 35%; /* Blue for Player 1 */
+  --player2: 30 90% 45%; /* Orange for Player 2 */
+  --selected: 280 80% 50%; /* Purple selection */
+  --legal-move: 140 60% 35%;
+  --shoot-target: 0 85% 45%;
+}
+
+/* Text Size Scaling */
+.text-size-large {
+  font-size: 1.125rem; /* 18px base */
+}
+
+.text-size-large .text-xs { font-size: 0.875rem; }
+.text-size-large .text-sm { font-size: 1rem; }
+.text-size-large .text-base { font-size: 1.25rem; }
+.text-size-large .text-lg { font-size: 1.5rem; }
+.text-size-large .text-xl { font-size: 1.75rem; }
+.text-size-large .text-2xl { font-size: 2rem; }
+.text-size-large .text-3xl { font-size: 2.5rem; }
+
+.text-size-extra-large {
+  font-size: 1.25rem; /* 20px base */
+}
+
+.text-size-extra-large .text-xs { font-size: 1rem; }
+.text-size-extra-large .text-sm { font-size: 1.25rem; }
+.text-size-extra-large .text-base { font-size: 1.5rem; }
+.text-size-extra-large .text-lg { font-size: 1.75rem; }
+.text-size-extra-large .text-xl { font-size: 2rem; }
+.text-size-extra-large .text-2xl { font-size: 2.5rem; }
+.text-size-extra-large .text-3xl { font-size: 3rem; }
+
+/* Custom Morabaraba Styles */
+.board-container {
+  aspect-ratio: 1/1;
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+}
+
+.cow-piece {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.cow-piece:hover {
+  transform: scale(1.1);
+}
+
+.mill-flash {
+  animation: flash 1s ease-in-out infinite;
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ============================================
+   LANDSCAPE MODE OPTIMIZATION
+   ============================================ */
+@media (orientation: landscape) and (max-height: 500px) {
+  .game-container {
+    flex-direction: row !important;
+  }
+  
+  .board-container {
+    max-width: 40vh;
+    height: 70vh;
+  }
+  
+  .controls-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
