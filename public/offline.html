@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1A0E05">
+  <title>Diketo - Offline</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #1A0E05 0%, #2A1A10 100%);
+      color: #D4B483;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .offline-container {
+      max-width: 400px;
+      padding: 40px 20px;
+    }
+    
+    .offline-icon {
+      font-size: 80px;
+      margin-bottom: 20px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(0.95); }
+    }
+    
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #FFD700;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #D4B483;
+      margin-bottom: 32px;
+    }
+    
+    .status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      margin-bottom: 24px;
+    }
+    
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      background: #E53935;
+      border-radius: 50%;
+      animation: blink 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    
+    .status-dot.connected {
+      background: #4CAF50;
+      animation: none;
+    }
+    
+    .retry-button {
+      background: linear-gradient(135deg, #C8782A 0%, #A0522D 100%);
+      color: white;
+      border: none;
+      padding: 16px 48px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(200, 120, 42, 0.4);
+    }
+    
+    .retry-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(200, 120, 42, 0.6);
+    }
+    
+    .retry-button:active {
+      transform: translateY(0);
+    }
+    
+    .offline-tips {
+      margin-top: 40px;
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .offline-tips h3 {
+      color: #FFD700;
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+    
+    .offline-tips ul {
+      text-align: left;
+      list-style: none;
+      padding: 0;
+    }
+    
+    .offline-tips li {
+      padding: 8px 0;
+      color: #D4B483;
+      font-size: 14px;
+    }
+    
+    .offline-tips li:before {
+      content: '🎮 ';
+      margin-right: 8px;
+    }
+    
+    .game-preview {
+      margin-top: 32px;
+      padding: 24px;
+      background: rgba(200, 120, 42, 0.1);
+      border-radius: 16px;
+      border: 2px dashed rgba(200, 120, 42, 0.3);
+    }
+    
+    .game-preview h3 {
+      color: #FFD700;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+    
+    .game-preview p {
+      font-size: 14px;
+      margin-bottom: 16px;
+      color: #D4B483;
+    }
+    
+    .stone-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    
+    .stone {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #9A8870, #7A6850, #1A1A1A);
+      box-shadow: inset -2px -4px 6px rgba(0,0,0,0.7);
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .stone:nth-child(2) { animation-delay: 0.5s; }
+    .stone:nth-child(3) { animation-delay: 1s; }
+    .stone:nth-child(4) { animation-delay: 1.5s; }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="offline-container">
+    <div class="offline-icon">🪨</div>
+    
+    <div class="status-indicator">
+      <span class="status-dot" id="statusDot"></span>
+      <span id="statusText">Checking connection...</span>
+    </div>
+    
+    <h1>You're Offline</h1>
+    <p>
+      Don't worry! Diketo can still be played offline. 
+      Your game progress and unlocked cosmetics are saved locally.
+    </p>
+    
+    <button class="retry-button" onclick="retryConnection()">
+      🔄 Try Again
+    </button>
+    
+    <div class="game-preview">
+      <h3>🎮 Play While Offline</h3>
+      <p>The game is cached and ready to play! Once you're back online, your progress will sync automatically.</p>
+      <div class="stone-row">
+        <div class="stone"></div>
+        <div class="stone"></div>
+        <div class="stone"></div>
+        <div class="stone"></div>
+      </div>
+    </div>
+    
+    <div class="offline-tips">
+      <h3>💡 Offline Tips</h3>
+      <ul>
+        <li>Your game progress is saved automatically</li>
+        <li>Unlocked cosmetics remain available</li>
+        <li>High scores are preserved locally</li>
+        <li>Game will sync when back online</li>
+      </ul>
+    </div>
+  </div>
+  
+  <script>
+    // Check connection status
+    function updateConnectionStatus() {
+      const statusDot = document.getElementById('statusDot');
+      const statusText = document.getElementById('statusText');
+      
+      if (navigator.onLine) {
+        statusDot.classList.add('connected');
+        statusText.textContent = 'Online! Redirecting...';
+        
+        // Redirect to home page after 2 seconds
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 2000);
+      } else {
+        statusDot.classList.remove('connected');
+        statusText.textContent = 'Offline';
+      }
+    }
+    
+    // Initial check
+    updateConnectionStatus();
+    
+    // Listen for connection changes
+    window.addEventListener('online', updateConnectionStatus);
+    window.addEventListener('offline', updateConnectionStatus);
+    
+    // Retry connection
+    function retryConnection() {
+      if (navigator.onLine) {
+        window.location.href = '/';
+      } else {
+        // Try to fetch the home page
+        fetch('/', { method: 'HEAD' })
+          .then(() => {
+            window.location.href = '/';
+          })
+          .catch(() => {
+            alert('Still offline. The game is still available to play!');
+          });
+      }
+    }
+    
+    // Register service worker for offline support
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then(registration => {
+          console.log('Service Worker registered:', registration);
+        })
+        .catch(error => {
+          console.error('Service Worker registration failed:', error);
+        });
+    }
+  </script>
+</body>
+</html>

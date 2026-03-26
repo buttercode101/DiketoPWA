@@ -1,0 +1,87 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Background gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#2A1A10"/>
+      <stop offset="100%" stop-color="#0A0502"/>
+    </radialGradient>
+    
+    <!-- Stone gradient -->
+    <radialGradient id="stoneGrad" cx="30%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#E8D5A0"/>
+      <stop offset="40%" stop-color="#C8782A"/>
+      <stop offset="100%" stop-color="#3A1A05"/>
+    </radialGradient>
+    
+    <!-- Gold gradient -->
+    <radialGradient id="goldGrad" cx="30%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="50%" stop-color="#DAA520"/>
+      <stop offset="100%" stop-color="#8B6508"/>
+    </radialGradient>
+    
+    <!-- Glow effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Shadow -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="512" height="512" rx="100" fill="url(#bgGrad)"/>
+  
+  <!-- Decorative border ring -->
+  <circle cx="256" cy="256" r="240" fill="none" stroke="#C8782A" stroke-width="3" opacity="0.3"/>
+  <circle cx="256" cy="256" r="220" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.2"/>
+  
+  <!-- Ground/earth base -->
+  <ellipse cx="256" cy="420" rx="180" ry="40" fill="#1A0E05" opacity="0.5"/>
+  
+  <!-- Small stones in hole (background) -->
+  <ellipse cx="200" cy="280" rx="18" ry="14" fill="url(#stoneGrad)" filter="url(#shadow)" opacity="0.7"/>
+  <ellipse cx="240" cy="290" rx="16" ry="12" fill="url(#stoneGrad)" filter="url(#shadow)" opacity="0.7"/>
+  <ellipse cx="280" cy="285" rx="17" ry="13" fill="url(#stoneGrad)" filter="url(#shadow)" opacity="0.7"/>
+  <ellipse cx="220" cy="310" rx="15" ry="11" fill="url(#stoneGrad)" filter="url(#shadow)" opacity="0.6"/>
+  <ellipse cx="260" cy="315" rx="16" ry="12" fill="url(#stoneGrad)" filter="url(#shadow)" opacity="0.6"/>
+  
+  <!-- Main Ghoen (golden throwing stone) - Center focus -->
+  <circle cx="256" cy="240" r="75" fill="url(#goldGrad)" filter="url(#glow), url(#shadow)"/>
+  
+  <!-- Ghoen highlight -->
+  <ellipse cx="230" cy="215" rx="25" ry="15" fill="rgba(255,255,255,0.4)" transform="rotate(-25 230 215)"/>
+  <ellipse cx="245" cy="205" rx="12" ry="7" fill="rgba(255,255,255,0.3)" transform="rotate(-25 245 205)"/>
+  
+  <!-- Motion lines (showing action) -->
+  <path d="M 256 140 Q 256 160 256 180" stroke="#FFD700" stroke-width="4" stroke-linecap="round" opacity="0.6" fill="none"/>
+  <path d="M 236 145 Q 236 165 236 175" stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="0.4" fill="none"/>
+  <path d="M 276 145 Q 276 165 276 175" stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="0.4" fill="none"/>
+  
+  <!-- Sparkle effects -->
+  <path d="M 320 200 L 330 200 M 325 195 L 325 205" stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <path d="M 190 260 L 200 260 M 195 255 L 195 265" stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <path d="M 330 280 L 340 280 M 335 275 L 335 285" stroke="#FFD700" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  
+  <!-- Traditional pattern accents (corners) -->
+  <path d="M 60 60 L 100 60 L 60 100" fill="none" stroke="#C8782A" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+  <circle cx="60" cy="60" r="6" fill="#C8782A" opacity="0.5"/>
+  
+  <path d="M 452 60 L 412 60 L 452 100" fill="none" stroke="#C8782A" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+  <circle cx="452" cy="60" r="6" fill="#C8782A" opacity="0.5"/>
+  
+  <path d="M 60 452 L 100 452 L 60 412" fill="none" stroke="#C8782A" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+  <circle cx="60" cy="452" r="6" fill="#C8782A" opacity="0.5"/>
+  
+  <path d="M 452 452 L 412 452 L 452 412" fill="none" stroke="#C8782A" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+  <circle cx="452" cy="452" r="6" fill="#C8782A" opacity="0.5"/>
+  
+  <!-- Title text (optional, can be removed for cleaner look) -->
+  <text x="256" y="470" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#FFD700" text-anchor="middle" opacity="0.9" letter-spacing="8">DIKETO</text>
+</svg>
